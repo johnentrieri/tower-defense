@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Block))]
 [ExecuteInEditMode]
 public class EditorSnap : MonoBehaviour
 {
-    private const int gridSize = 2;
-    private Vector3 snapPosition;
+    private Block block;
+
+    void Awake() {
+        block = GetComponent<Block>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -16,15 +20,17 @@ public class EditorSnap : MonoBehaviour
     }
 
     void SnapToGrid() {
-        snapPosition.x = Mathf.Round(transform.position.x / gridSize) * gridSize;
-        snapPosition.y = 0;
-        snapPosition.z = Mathf.Round(transform.position.z / gridSize) * gridSize;
-        
-        transform.position = snapPosition;
+        int gridSize = block.GetGridSize();
+        transform.position = new Vector3(
+            block.GetGridPos().x,
+            0,
+            block.GetGridPos().y
+        );
     }
 
     void UpdateNameAndLabel() {
-        string coordText = (snapPosition.x / gridSize) + "," + (snapPosition.z / gridSize);
+        int gridSize = block.GetGridSize();
+        string coordText = (block.GetGridPos().x / gridSize) + "," + (block.GetGridPos().y / gridSize);
         TextMesh textMesh = GetComponentInChildren<TextMesh>();
         textMesh.text = coordText;
         gameObject.name = "Block (" + coordText + ")";

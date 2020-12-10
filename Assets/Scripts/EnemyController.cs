@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Move());      
+        //StartCoroutine(MoveAlongPath());      
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    private IEnumerator Move() {       
+    private IEnumerator MoveAlongPath() {       
         foreach(Block block in path) {
             Vector3 endPos = block.transform.position;
             float d = Vector3.Distance(transform.position,endPos);
