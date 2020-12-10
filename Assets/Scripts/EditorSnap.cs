@@ -17,10 +17,20 @@ public class EditorSnap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SnapToGrid();
+        UpdateLabel();
+    }
+
+    void SnapToGrid() {
         snapPosition.x = Mathf.Round(transform.position.x / gridSize) * gridSize;
         snapPosition.y = 0;
         snapPosition.z = Mathf.Round(transform.position.z / gridSize) * gridSize;
         
         transform.position = snapPosition;
+    }
+
+    void UpdateLabel() {
+        TextMesh textMesh = GetComponentInChildren<TextMesh>();
+        textMesh.text = snapPosition.x + "," + snapPosition.z;
     }
 }

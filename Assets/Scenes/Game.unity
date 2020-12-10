@@ -305,6 +305,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 215111209665149602, guid: 9e041197cfbf84144a1e3b5c99f7bf45, type: 3}
+      propertyPath: m_Text
+      value: 0,0
+      objectReference: {fileID: 0}
     - target: {fileID: 1141656680320555834, guid: 9e041197cfbf84144a1e3b5c99f7bf45, type: 3}
       propertyPath: m_Name
       value: Block
@@ -315,7 +319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141656680320555835, guid: 9e041197cfbf84144a1e3b5c99f7bf45, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1141656680320555835, guid: 9e041197cfbf84144a1e3b5c99f7bf45, type: 3}
       propertyPath: m_LocalPosition.y
@@ -323,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141656680320555835, guid: 9e041197cfbf84144a1e3b5c99f7bf45, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1141656680320555835, guid: 9e041197cfbf84144a1e3b5c99f7bf45, type: 3}
       propertyPath: m_LocalRotation.w
