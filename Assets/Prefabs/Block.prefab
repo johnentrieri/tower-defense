@@ -298,6 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1141656680320555835}
   - component: {fileID: 513950534463590140}
+  - component: {fileID: 98075294941821212}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -338,6 +339,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 2
+--- !u!114 &98075294941821212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141656680320555834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5eb2baed2ec44428a67b6d29f13e54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1141656680415603326
 GameObject:
   m_ObjectHideFlags: 0

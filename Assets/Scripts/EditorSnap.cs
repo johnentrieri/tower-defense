@@ -5,20 +5,14 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class EditorSnap : MonoBehaviour
 {
-    [SerializeField] float gridSize = 2.0f;
+    private const int gridSize = 2;
     private Vector3 snapPosition;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         SnapToGrid();
-        UpdateLabel();
+        UpdateNameAndLabel();
     }
 
     void SnapToGrid() {
@@ -29,8 +23,10 @@ public class EditorSnap : MonoBehaviour
         transform.position = snapPosition;
     }
 
-    void UpdateLabel() {
+    void UpdateNameAndLabel() {
+        string coordText = (snapPosition.x / gridSize) + "," + (snapPosition.z / gridSize);
         TextMesh textMesh = GetComponentInChildren<TextMesh>();
-        textMesh.text = snapPosition.x + "," + snapPosition.z;
+        textMesh.text = coordText;
+        gameObject.name = "Block (" + coordText + ")";
     }
 }
