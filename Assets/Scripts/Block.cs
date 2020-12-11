@@ -6,20 +6,8 @@ public class Block : MonoBehaviour
 
 {
     private const int gridSize = 2;
-    
-    private Vector2Int gridPos;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public int GetGridSize() {
         return gridSize;

@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
-{
-    [SerializeField] List<Block> path;
+{   
     [Tooltip("Blocks Per Second")][SerializeField] float speed = 1.0f;
     [Tooltip("Frames Per Block")][SerializeField] int steps = 60;
+    private List<Block> path;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //StartCoroutine(MoveAlongPath());      
+    public void Spawn(Block block) {
+        gameObject.SetActive(true);
+        transform.position = new Vector3(
+            block.GetGridPos().x * block.GetGridSize(),
+            0,
+            block.GetGridPos().y * block.GetGridSize()
+        );        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+    public void MoveAlongPath(List<Block> blockPath) {
+        path = blockPath;
+        StartCoroutine(Move());
     }
 
-    private IEnumerator MoveAlongPath() {       
+    private IEnumerator Move() {       
         foreach(Block block in path) {
             Vector3 endPos = block.transform.position;
             float d = Vector3.Distance(transform.position,endPos);
