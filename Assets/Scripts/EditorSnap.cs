@@ -22,15 +22,15 @@ public class EditorSnap : MonoBehaviour
     void SnapToGrid() {
         int gridSize = block.GetGridSize();
         transform.position = new Vector3(
-            block.GetGridPos().x,
+            block.GetGridPos().x * gridSize,
             0,
-            block.GetGridPos().y
+            block.GetGridPos().y * gridSize
         );
     }
 
     void UpdateNameAndLabel() {
         int gridSize = block.GetGridSize();
-        string coordText = (block.GetGridPos().x / gridSize) + "," + (block.GetGridPos().y / gridSize);
+        string coordText = (block.GetGridPos().x) + "," + (block.GetGridPos().y);
         TextMesh textMesh = GetComponentInChildren<TextMesh>();
         textMesh.text = coordText;
         gameObject.name = "Block (" + coordText + ")";
