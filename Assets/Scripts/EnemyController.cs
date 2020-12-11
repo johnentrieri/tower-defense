@@ -4,32 +4,59 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {   
-    [Tooltip("Blocks Per Second")][SerializeField] float speed = 1.0f;
-    [Tooltip("Frames Per Block")][SerializeField] int steps = 60;
+    [Header("Enemy Characteristics")]
+    [Tooltip("Enemy Game Object")][SerializeField] GameObject enemy;
+    [Tooltip("Spawn Parent")][SerializeField] Transform spawnParent;
+    [Tooltip("Enemy Count")][SerializeField] int enemyCount = 1;
+    [Tooltip("Enemies per Second")][SerializeField] float spawnRate = 1.0f;
+    [Tooltip("Delay Before First Spawn")][SerializeField] float spawnDelay = 0.0f;
+    
+
+
+    [Header("Movement Parameters")]
+    [Tooltip("Blocks per Second")][SerializeField] float speed = 1.0f;
+    [Tooltip("Frames per Block")][SerializeField] int steps = 60;
+
+
+    private Pathfinder pathfinder;
     private List<Block> path;
 
-    public void Spawn(Block block) {
-        gameObject.SetActive(true);
-        transform.position = new Vector3(
-            block.GetGridPos().x * block.GetGridSize(),
-            0,
-            block.GetGridPos().y * block.GetGridSize()
-        );        
+
+    void Start() {
+        pathfinder = GetComponent<Pathfinder>();        
+        path = pathfinder.GetShortestPath();
+
+        StartCoroutine(SpawnEnemies());
     }
 
-    public void MoveAlongPath(List<Block> blockPath) {
-        path = blockPath;
-        StartCoroutine(Move());
+    private IEnumerator SpawnEnemies() {
+
+        yield return new WaitForSeconds(spawnDelay);
+
+        for(int i=0 ; i < enemyCount ; i++) {
+
+            Block spawnBlock = pathfinder.GetStartBlock();
+            int gridSize = spawnBlock.GetGridSize();
+            int startX = spawnBlock.GetGridPos().x * gridSize;
+            int startZ = spawnBlock.GetGridPos().y * gridSize;
+            Vector3 startPos = new Vector3(startX,0,startZ);
+
+            GameObject spawnedEnemy = GameObject.Instantiate(enemy, startPos, Quaternion.identity, spawnParent);
+            spawnedEnemy.SetActive(true);
+
+            StartCoroutine(MoveEnemyAlongPath(spawnedEnemy));
+            yield return new WaitForSeconds(1.0f / spawnRate);
+        }
     }
 
-    private IEnumerator Move() {       
+    private IEnumerator MoveEnemyAlongPath(GameObject movingEnemy) {       
         foreach(Block block in path) {
             Vector3 endPos = block.transform.position;
-            float d = Vector3.Distance(transform.position,endPos);
+            float d = Vector3.Distance(movingEnemy.transform.position,endPos);
             float maxDistancePerStep = d / steps;
             for (float i = 0; i < steps; i++) {               
-                Vector3 nextPos = Vector3.MoveTowards(transform.position,endPos,maxDistancePerStep);            
-                transform.position = nextPos;
+                Vector3 nextPos = Vector3.MoveTowards(movingEnemy.transform.position,endPos,maxDistancePerStep);            
+                movingEnemy.transform.position = nextPos;
                 yield return new WaitForSeconds(1.0f / (speed * steps));
             }
         }

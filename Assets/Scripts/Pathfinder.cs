@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pathfinder : MonoBehaviour
+public class Pathfinder : MonoBehaviour 
 {
-    [SerializeField] Block startBlock;
-    [SerializeField] Block endBlock;
-    [SerializeField] EnemyController enemy;
+    [SerializeField] Block startBlock, endBlock;
     private Dictionary<Vector2Int,Block> grid = new Dictionary<Vector2Int, Block>();
     private Dictionary<Block,Block> queueMap = new Dictionary<Block, Block>();
     private List<Block> shortestPath = new List<Block>();
-    private int checkedBlocks;
-
     Queue<Block> queue = new Queue<Block>();
-
     private Vector2Int[] allowedDirections = {
         Vector2Int.up,
         Vector2Int.right,
@@ -21,34 +16,28 @@ public class Pathfinder : MonoBehaviour
         Vector2Int.left
     };
 
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    public List<Block> GetShortestPath() {
         LoadBlocks();
         SetStartAndEndColors();
         Pathfind();
 
-        enemy.Spawn(startBlock);
-        enemy.MoveAlongPath(shortestPath);
+        return shortestPath;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public Block GetStartBlock() {
+        return startBlock;
     }
 
     private void Pathfind() {
         queue.Clear();
         queueMap.Clear();
         shortestPath.Clear();
-        checkedBlocks = 0;
 
         EnqueueAndMap(startBlock,startBlock);
 
         while (queue.Count > 0) {
             Block searchBlock = queue.Dequeue();
-            print("Searching from " + searchBlock);
             if (CheckEndBlock(searchBlock)) { return; }          
             EnqueueNeighbors(searchBlock);
         }
@@ -86,9 +75,7 @@ public class Pathfinder : MonoBehaviour
     }
 
     private bool CheckEndBlock(Block block) {
-        checkedBlocks++;
         if (block.GetGridPos() == endBlock.GetGridPos()) {
-            print("End Block Found At " + block.GetGridPos());
             TracePath(block);
             return true;
         } else {
@@ -102,7 +89,9 @@ public class Pathfinder : MonoBehaviour
     }
 
     private void LoadBlocks() {
-        Block[] blocks = GetComponentsInChildren<Block>();
+        grid.Clear();
+        GameObject blockParent = startBlock.transform.parent.gameObject;
+        Block[] blocks = blockParent.GetComponentsInChildren<Block>();
         foreach(Block block in blocks) {
             if (grid.ContainsKey(block.GetGridPos())) {
                 Debug.LogWarning("Overlapping Block: " + block);
