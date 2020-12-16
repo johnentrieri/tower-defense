@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {   
     [Header("Enemy Characteristics")]
     [Tooltip("Enemy Game Object")][SerializeField] GameObject enemy;
+    [Tooltip("Enemy Health")][SerializeField] int enemyHealth;
     [Tooltip("Spawn Parent")][SerializeField] Transform spawnParent;
     [Tooltip("Enemy Count")][SerializeField] int enemyCount = 1;
     [Tooltip("Enemies per Second")][SerializeField] float spawnRate = 1.0f;
@@ -28,7 +29,6 @@ public class EnemyController : MonoBehaviour
 
         StartCoroutine(SpawnEnemies());
     }
-
     private IEnumerator SpawnEnemies() {
 
         yield return new WaitForSeconds(spawnDelay);
@@ -44,6 +44,9 @@ public class EnemyController : MonoBehaviour
             GameObject spawnedEnemy = GameObject.Instantiate(enemy, startPos, Quaternion.identity, spawnParent);
             spawnedEnemy.SetActive(true);
 
+            spawnedEnemy.GetComponentInChildren<Enemy>().SetSpawnParent(spawnParent);
+            spawnedEnemy.GetComponentInChildren<Enemy>().SetEnemyHealth(enemyHealth);
+
             StartCoroutine(MoveEnemyAlongPath(spawnedEnemy));
             yield return new WaitForSeconds(1.0f / spawnRate);
         }
@@ -51,13 +54,15 @@ public class EnemyController : MonoBehaviour
 
     private IEnumerator MoveEnemyAlongPath(GameObject movingEnemy) {       
         foreach(Block block in path) {
+            if (movingEnemy == null) { break; }  
             Vector3 endPos = block.transform.position;
             float d = Vector3.Distance(movingEnemy.transform.position,endPos);
             float maxDistancePerStep = d / steps;
-            for (float i = 0; i < steps; i++) {               
+            for (float i = 0; i < steps; i++) {   
+                if (movingEnemy == null) { break; }             
                 Vector3 nextPos = Vector3.MoveTowards(movingEnemy.transform.position,endPos,maxDistancePerStep);            
                 movingEnemy.transform.position = nextPos;
-                yield return new WaitForSeconds(1.0f / (speed * steps));
+                yield return new WaitForSeconds(1.0f / (speed * steps));                
             }
         }
     }
