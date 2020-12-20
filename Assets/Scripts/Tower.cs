@@ -8,6 +8,7 @@ public class Tower : MonoBehaviour
     [SerializeField] Transform headObject;
     [SerializeField] Transform enemySpawnParent;
     [SerializeField] float viewDistance;
+    [SerializeField] float fireRate;
 
     //private Enemy target;
 
@@ -48,6 +49,7 @@ public class Tower : MonoBehaviour
 
     private void ToggleShoot( bool isShoot) {
         ParticleSystem.EmissionModule projectileEmissions = GetComponentInChildren<ParticleSystem>().emission;
+        projectileEmissions.rateOverTime = fireRate;
         projectileEmissions.enabled = isShoot;
     }
 
@@ -58,7 +60,7 @@ public class Tower : MonoBehaviour
             float enemyDistance = Vector3.Distance(transform.position,e.transform.position);
             if ( (enemyDistance - viewDistance) <= Mathf.Epsilon) { return e; }
         }
-        
+
         return null;
     }
 }

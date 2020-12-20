@@ -4886,7 +4886,7 @@ GameObject:
   - component: {fileID: 5459247985708530983}
   - component: {fileID: 2232758871043806484}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: Dark Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4923,6 +4923,8 @@ MonoBehaviour:
   baseObject: {fileID: 7346817906408005842}
   headObject: {fileID: 49227662648814795}
   enemySpawnParent: {fileID: 0}
+  viewDistance: 10
+  fireRate: 2
 --- !u!1001 &168990643508278548
 PrefabInstance:
   m_ObjectHideFlags: 0
