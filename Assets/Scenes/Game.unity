@@ -6455,6 +6455,10 @@ PrefabInstance:
       value: 16.82
       objectReference: {fileID: 0}
     - target: {fileID: 2232758871043806484, guid: edf190fb6abf3d849b43a2caee16c02f, type: 3}
+      propertyPath: viewDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2232758871043806484, guid: edf190fb6abf3d849b43a2caee16c02f, type: 3}
       propertyPath: enemySpawnParent
       value: 
       objectReference: {fileID: 801957517}
