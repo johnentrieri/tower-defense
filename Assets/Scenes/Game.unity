@@ -1651,12 +1651,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1833992296747133517, guid: f381195eb752c7c4ab3b633d7e322f0f, type: 3}
-  enemyHealth: 8
+  enemyHealth: 5
   spawnParent: {fileID: 801957517}
-  enemyCount: 3
+  enemyCount: 2
   spawnRate: 1
   spawnDelay: 20
-  speed: 10
+  speed: 8
   steps: 60
 --- !u!114 &583889759 stripped
 MonoBehaviour:
@@ -2855,7 +2855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1833992296747133517, guid: a54962f48c7f15b4a93c98128ae981fd, type: 3}
-  enemyHealth: 5
+  enemyHealth: 3
   spawnParent: {fileID: 801957517}
   enemyCount: 3
   spawnRate: 1
@@ -6453,10 +6453,6 @@ PrefabInstance:
     - target: {fileID: 49227662648814795, guid: edf190fb6abf3d849b43a2caee16c02f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 16.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 2232758871043806484, guid: edf190fb6abf3d849b43a2caee16c02f, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2232758871043806484, guid: edf190fb6abf3d849b43a2caee16c02f, type: 3}
       propertyPath: enemySpawnParent

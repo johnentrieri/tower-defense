@@ -10,6 +10,10 @@ public class Tower : MonoBehaviour
 
     private Enemy target;
 
+    void Start() {
+        ToggleShoot(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -17,8 +21,12 @@ public class Tower : MonoBehaviour
         LookAtTarget();
     }
 
-    void LookAtTarget() {
-        if (target == null) { return; }
+    private void LookAtTarget() {
+        if (target == null) { 
+            ToggleShoot(false);
+            return;
+        }
+
         Transform targetObject = target.transform;
 
         Vector3 baseTargetPosition = new Vector3(
@@ -35,5 +43,11 @@ public class Tower : MonoBehaviour
 
         baseObject.LookAt(baseTargetPosition);
         headObject.LookAt(headTargetPosition);
+        ToggleShoot(true);
+    }
+
+    private void ToggleShoot( bool isShoot) {
+        ParticleSystem.EmissionModule projectileEmissions = GetComponentInChildren<ParticleSystem>().emission;
+        projectileEmissions.enabled = isShoot;
     }
 }
