@@ -52,19 +52,13 @@ public class Tower : MonoBehaviour
     }
 
     private Enemy GetClosestTarget() {
-        Enemy[] enemies = enemySpawnParent.GetComponentsInChildren<Enemy>();        
-
-        Enemy closestEnemy = null;
-        float minDistance = viewDistance;
+        Enemy[] enemies = enemySpawnParent.GetComponentsInChildren<Enemy>();      
 
         foreach(Enemy e in enemies) {
             float enemyDistance = Vector3.Distance(transform.position,e.transform.position);
-            if ( (enemyDistance - minDistance) <= Mathf.Epsilon) {
-                closestEnemy = e;
-                minDistance = enemyDistance;
-            }
+            if ( (enemyDistance - viewDistance) <= Mathf.Epsilon) { return e; }
         }
-
-        return closestEnemy;
+        
+        return null;
     }
 }
