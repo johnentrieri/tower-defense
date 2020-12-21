@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
 
 
     private Pathfinder pathfinder;
-    private List<Block> path;
+    private List<EnemyBlock> path;
 
 
     void Start() {
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
 
         for(int i=0 ; i < enemyCount ; i++) {
 
-            Block spawnBlock = pathfinder.GetStartBlock();
+            EnemyBlock spawnBlock = pathfinder.GetStartBlock();
             int gridSize = spawnBlock.GetGridSize();
             int startX = spawnBlock.GetGridPos().x * gridSize;
             int startZ = spawnBlock.GetGridPos().y * gridSize;
@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private IEnumerator MoveEnemyAlongPath(GameObject movingEnemy) {       
-        foreach(Block block in path) {
+        foreach(EnemyBlock block in path) {
             if (movingEnemy == null) { break; }  
             Vector3 endPos = block.transform.position;
             float d = Vector3.Distance(movingEnemy.transform.position,endPos);

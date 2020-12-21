@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class EnemyBlock : MonoBehaviour
 
 {
     private const int gridSize = 2;
-
-    // Start is called before the first frame update
 
     public int GetGridSize() {
         return gridSize;
@@ -23,5 +21,10 @@ public class Block : MonoBehaviour
     public void SetTopColor(Color color) {
         MeshRenderer topMeshRenderer = transform.Find("Top").GetComponent<MeshRenderer>();
         topMeshRenderer.material.color = color;
+    }
+
+    public Color GetTopColor() {
+        MeshRenderer topMeshRenderer = transform.Find("Top").GetComponent<MeshRenderer>();
+        return topMeshRenderer.material.color;
     }
 }

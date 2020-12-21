@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void ProcessEnemyDeath() {
-        Instantiate(explosion,transform.position,Quaternion.identity,explosionSpawnParent);
+        Destroy( Instantiate(explosion,transform.position,Quaternion.identity,explosionSpawnParent), 3.0f );
         Destroy(transform.parent.gameObject);
     }
 

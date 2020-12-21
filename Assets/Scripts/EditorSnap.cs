@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Block))]
+[RequireComponent(typeof(EnemyBlock))]
 [ExecuteInEditMode]
 public class EditorSnap : MonoBehaviour
 {
-    private Block block;
+    private EnemyBlock block;
 
     void Awake() {
-        block = GetComponent<Block>();
+        block = GetComponent<EnemyBlock>();
     }
 
     // Update is called once per frame
@@ -33,6 +33,6 @@ public class EditorSnap : MonoBehaviour
         string coordText = (block.GetGridPos().x) + "," + (block.GetGridPos().y);
         TextMesh textMesh = GetComponentInChildren<TextMesh>();
         textMesh.text = coordText;
-        gameObject.name = "Block (" + coordText + ")";
+        gameObject.name = "Enemy Block (" + coordText + ")";
     }
 }

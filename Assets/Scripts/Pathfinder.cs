@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Pathfinder : MonoBehaviour 
 {
-    [SerializeField] Block startBlock, endBlock;
-    private Dictionary<Vector2Int,Block> grid = new Dictionary<Vector2Int, Block>();
-    private Dictionary<Block,Block> queueMap = new Dictionary<Block, Block>();
-    private List<Block> shortestPath = new List<Block>();
-    Queue<Block> queue = new Queue<Block>();
+    [SerializeField] EnemyBlock startBlock, endBlock;
+    private Dictionary<Vector2Int,EnemyBlock> grid = new Dictionary<Vector2Int, EnemyBlock>();
+    private Dictionary<EnemyBlock,EnemyBlock> queueMap = new Dictionary<EnemyBlock, EnemyBlock>();
+    private List<EnemyBlock> shortestPath = new List<EnemyBlock>();
+    Queue<EnemyBlock> queue = new Queue<EnemyBlock>();
     private Vector2Int[] allowedDirections = {
         Vector2Int.up,
         Vector2Int.right,
@@ -17,15 +17,14 @@ public class Pathfinder : MonoBehaviour
     };
 
 
-    public List<Block> GetShortestPath() {
+    public List<EnemyBlock> GetShortestPath() {
         LoadBlocks();
-        SetStartAndEndColors();
         Pathfind();
 
         return shortestPath;
     }
 
-    public Block GetStartBlock() {
+    public EnemyBlock GetStartBlock() {
         return startBlock;
     }
 
@@ -37,44 +36,42 @@ public class Pathfinder : MonoBehaviour
         EnqueueAndMap(startBlock,startBlock);
 
         while (queue.Count > 0) {
-            Block searchBlock = queue.Dequeue();
+            EnemyBlock searchBlock = queue.Dequeue();
             if (CheckEndBlock(searchBlock)) { return; }          
             EnqueueNeighbors(searchBlock);
         }
     }
 
-    private void EnqueueNeighbors(Block block) {
+    private void EnqueueNeighbors(EnemyBlock block) {
         foreach (Vector2Int direction in allowedDirections) {
 
             Vector2Int explorePos = block.GetGridPos() + direction;
             if (!grid.ContainsKey(explorePos)) { continue; }
 
-            Block neighbor = grid[explorePos];
+            EnemyBlock neighbor = grid[explorePos];
             if (queueMap.ContainsKey(neighbor)) { continue; }
 
             EnqueueAndMap(neighbor, block);
         }
     }
 
-    private void TracePath(Block end) {
+    private void TracePath(EnemyBlock end) {
         shortestPath.Add(end);
         while ( !shortestPath.Contains(startBlock)) {
-            Block lastItem = shortestPath[shortestPath.Count-1];
-            Block queuer = queueMap[lastItem];
-
-            if (queuer != startBlock) { queuer.SetTopColor(Color.yellow); }
+            EnemyBlock lastItem = shortestPath[shortestPath.Count-1];
+            EnemyBlock queuer = queueMap[lastItem];
             shortestPath.Add(queuer);
         }
         shortestPath.Reverse();
         shortestPath.Remove(startBlock);
     }
 
-    private void EnqueueAndMap(Block block, Block queuedBy) {
+    private void EnqueueAndMap(EnemyBlock block, EnemyBlock queuedBy) {
         queue.Enqueue(block);
         queueMap.Add(block,queuedBy);
     }
 
-    private bool CheckEndBlock(Block block) {
+    private bool CheckEndBlock(EnemyBlock block) {
         if (block.GetGridPos() == endBlock.GetGridPos()) {
             TracePath(block);
             return true;
@@ -83,16 +80,11 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
-    private void SetStartAndEndColors() {
-        startBlock.SetTopColor(Color.green);
-        endBlock.SetTopColor(Color.red);
-    }
-
     private void LoadBlocks() {
         grid.Clear();
         GameObject blockParent = startBlock.transform.parent.gameObject;
-        Block[] blocks = blockParent.GetComponentsInChildren<Block>();
-        foreach(Block block in blocks) {
+        EnemyBlock[] blocks = blockParent.GetComponentsInChildren<EnemyBlock>();
+        foreach(EnemyBlock block in blocks) {
             if (grid.ContainsKey(block.GetGridPos())) {
                 Debug.LogWarning("Overlapping Block: " + block);
             } else {

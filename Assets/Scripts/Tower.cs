@@ -6,7 +6,6 @@ public class Tower : MonoBehaviour
 {
     [SerializeField] Transform baseObject;
     [SerializeField] Transform headObject;
-    [SerializeField] Transform enemySpawnParent;
     [SerializeField] float viewDistance;
     [SerializeField] float fireRate;
 
@@ -54,7 +53,7 @@ public class Tower : MonoBehaviour
     }
 
     private Enemy GetClosestTarget() {
-        Enemy[] enemies = enemySpawnParent.GetComponentsInChildren<Enemy>();      
+        Enemy[] enemies = transform.parent.GetComponentsInChildren<Enemy>();      
 
         foreach(Enemy e in enemies) {
             float enemyDistance = Vector3.Distance(transform.position,e.transform.position);
