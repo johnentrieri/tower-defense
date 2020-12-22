@@ -21,6 +21,11 @@ public class Tower : MonoBehaviour
         LookAtTarget(target);
     }
 
+    public Color GetColor() {
+        MeshRenderer meshRenderer = gameObject.GetComponentInChildren<MeshRenderer>();
+        return meshRenderer.sharedMaterial.color;
+    }
+
     private void LookAtTarget(Enemy target) {
         if (target == null) { 
             ToggleShoot(false);

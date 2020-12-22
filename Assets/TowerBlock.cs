@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class TowerBlock : MonoBehaviour
 {
-    [SerializeField] Color previewColor = Color.magenta;
     [SerializeField] Tower spawnTower;
     [SerializeField] Transform spawnParent;
+    private Color previewColor;
     private Color startingColor;
     private int gridSize;
     private Tower tower;
 
     void Start() {
         GetGridSize();
-        startingColor = GetTopColor();      
+        startingColor = GetTopColor();
     }
 
     void OnMouseOver() {
+        SetPreviewColor( spawnTower.GetColor() );
         SetTopColor(previewColor);        
     }
 
     void OnMouseUpAsButton() {
         if (tower != null) {
-            print("!");
             Destroy(tower.gameObject);
         } else {
             Vector2Int spawnPosition = GetGridPos();
-            tower = SpawnTower(spawnPosition);   
+            tower = SpawnTower(spawnPosition);
         }     
     }
 
@@ -36,6 +36,7 @@ public class TowerBlock : MonoBehaviour
 
     
     public void SetPreviewColor(Color color) {
+        print(color.ToString());
         previewColor = color;
     }
 
