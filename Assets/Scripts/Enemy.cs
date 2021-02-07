@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] GameObject explosion;
+    [SerializeField] ParticleSystem explosion;
     [SerializeField] ParticleSystem hitEffect;
 
     private int enemyHealth = 1;
@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour
     }
 
     private void ProcessEnemyDeath() {
-        Destroy( Instantiate(explosion,transform.position,Quaternion.identity,explosionSpawnParent), 3.0f );
+        float explosionDuration = explosion.main.duration;
+        Destroy( Instantiate(explosion,transform.position,Quaternion.identity,explosionSpawnParent).gameObject, explosionDuration);
         Destroy(transform.parent.gameObject);
     }
 
