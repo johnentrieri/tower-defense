@@ -7,28 +7,39 @@ public class TowerFactory : MonoBehaviour
     [SerializeField] Tower spawnTower;
     [SerializeField] Transform spawnParent;
     [SerializeField] int maxTowers;
-    private int towersPlaced;
+    private Dictionary<Vector3,Tower> towers = new Dictionary<Vector3,Tower>();
 
-    void Start() {
-        towersPlaced = 0;
-    }
-
-    public Color GetTowerColor() {
-        return spawnTower.GetColor();
+    public Color GetTowerPreviewColor() {
+        if (towers.Count >= maxTowers) {
+            return Color.red;
+        } else {
+            return spawnTower.GetColor();
+        }
     }
 
     public void SpawnTower(TowerBlock spawnBlock) {
-        if (towersPlaced >= maxTowers) { return; }
-
-        Vector3 spawnPosition = new Vector3( 
-            spawnBlock.GetGridPos().x * spawnBlock.GetGridSize(),
-            0,
-            spawnBlock.GetGridPos().y * spawnBlock.GetGridSize()
-        );
-
-        GameObject.Instantiate(spawnTower,spawnPosition,Quaternion.identity,spawnParent);
-        towersPlaced++;
+        if (!spawnBlock.GetPlaceability()) {
+            RemoveTower(spawnBlock);
+        } else {
+            if (towers.Count >= maxTowers) { return; }
+            AddTower(spawnBlock);
+        }  
     }
 
-    //TODO - Destroy Tower
+    private void AddTower(TowerBlock spawnBlock) {
+        Vector3 blockPosition = spawnBlock.GetWorldPos();
+        Tower tower = GameObject.Instantiate(spawnTower,blockPosition,Quaternion.identity,spawnParent);
+
+        towers.Add(blockPosition,tower);
+        spawnBlock.SetPlaceability(false);
+    }
+
+    private void RemoveTower(TowerBlock spawnBlock) {
+        Vector3 blockPosition = spawnBlock.GetWorldPos();        
+        Tower tower = towers[blockPosition];
+
+        Destroy(tower.transform.gameObject);
+        spawnBlock.SetPlaceability(true);
+        towers.Remove(blockPosition);
+    }
 }
