@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] ParticleSystem explosion;
+    [SerializeField] ParticleSystem deathExplosion;
+    [SerializeField] ParticleSystem goalExplosion;
     [SerializeField] ParticleSystem hitEffect;
 
     private int enemyHealth = 1;
@@ -14,11 +15,15 @@ public class Enemy : MonoBehaviour
 
         hitEffect.Play();
         if ( --enemyHealth <= 0) {
-            ProcessEnemyDeath();
+            ProcessEnemyDeath(deathExplosion);
         }
     }
 
-    private void ProcessEnemyDeath() {
+    public void ProcessGoalReached() {
+        ProcessEnemyDeath(goalExplosion);
+    }
+
+    private void ProcessEnemyDeath(ParticleSystem explosion) {
         float explosionDuration = explosion.main.duration;
         Destroy( Instantiate(explosion,transform.position,Quaternion.identity,explosionSpawnParent).gameObject, explosionDuration);
         Destroy(transform.parent.gameObject);

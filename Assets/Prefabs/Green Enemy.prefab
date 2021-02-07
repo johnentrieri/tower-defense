@@ -110,7 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfee7b803340c74ebe9a6ce801e55ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 1570171288654123530, guid: 756dddc5b3f9d884da8e919142524055, type: 3}
+  deathExplosion: {fileID: 1570171288654123530, guid: 756dddc5b3f9d884da8e919142524055, type: 3}
+  goalExplosion: {fileID: 1570171288654123530, guid: 85ebf6e094f6ce24db9d461ef2a60c0b, type: 3}
   hitEffect: {fileID: 5494858319734557068}
 --- !u!1 &1833992296747133517
 GameObject:

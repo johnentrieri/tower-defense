@@ -28,6 +28,10 @@ public class Pathfinder : MonoBehaviour
         return startBlock;
     }
 
+    public EnemyBlock GetEndBlock() {
+        return endBlock;
+    }
+
     private void Pathfind() {
         queue.Clear();
         queueMap.Clear();

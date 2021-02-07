@@ -18,6 +18,16 @@ public class EnemyBlock : MonoBehaviour
         );
     }
 
+    public Vector3 GetWorldPos() {
+        Vector3 worldPosition = new Vector3( 
+            GetGridPos().x * GetGridSize(),
+            0,
+            GetGridPos().y * GetGridSize()
+        );
+
+        return worldPosition;
+    }
+
     public void SetTopColor(Color color) {
         MeshRenderer topMeshRenderer = transform.Find("Top").GetComponent<MeshRenderer>();
         topMeshRenderer.material.color = color;

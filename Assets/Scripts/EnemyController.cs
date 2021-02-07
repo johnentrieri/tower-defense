@@ -62,6 +62,9 @@ public class EnemyController : MonoBehaviour
                 if (movingEnemy == null) { break; }             
                 Vector3 nextPos = Vector3.MoveTowards(movingEnemy.transform.position,endPos,maxDistancePerStep);            
                 movingEnemy.transform.position = nextPos;
+                if ( pathfinder.GetEndBlock().GetWorldPos() == movingEnemy.transform.position) {
+                    movingEnemy.GetComponentInChildren<Enemy>().ProcessGoalReached();
+                }
                 yield return new WaitForSeconds(1.0f / (speed * steps));                
             }
         }
