@@ -603,6 +603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 258271414}
+  - component: {fileID: 258271415}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -627,6 +628,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &258271415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258271413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c9198588be7304fa1eda9e2a1a4e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnTower: {fileID: 2232758871043806484, guid: edf190fb6abf3d849b43a2caee16c02f, type: 3}
+  spawnParent: {fileID: 801957517}
+  maxTowers: 2
 --- !u!1 &266380055
 GameObject:
   m_ObjectHideFlags: 0
