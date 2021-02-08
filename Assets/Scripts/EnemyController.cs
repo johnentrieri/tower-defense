@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy Characteristics")]
     [Tooltip("Enemy Game Object")][SerializeField] GameObject enemy;
     [Tooltip("Enemy Health")][SerializeField] int enemyHealth;
+    [Tooltip("Enemy Damage")][SerializeField] int enemyDamage;
     [Tooltip("Spawn Parent")][SerializeField] Transform spawnParent;
     [Tooltip("Enemy Count")][SerializeField] int enemyCount = 1;
     [Tooltip("Enemies per Second")][SerializeField] float spawnRate = 1.0f;
@@ -46,6 +47,7 @@ public class EnemyController : MonoBehaviour
 
             spawnedEnemy.GetComponentInChildren<Enemy>().SetSpawnParent(spawnParent);
             spawnedEnemy.GetComponentInChildren<Enemy>().SetEnemyHealth(enemyHealth);
+            spawnedEnemy.GetComponentInChildren<Enemy>().SetEnemyDamage(enemyDamage);
 
             StartCoroutine(MoveEnemyAlongPath(spawnedEnemy));
             yield return new WaitForSeconds(1.0f / spawnRate);

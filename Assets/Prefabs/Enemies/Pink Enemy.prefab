@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1571039023841720072}
   - component: {fileID: 1571039023841720073}
   - component: {fileID: 1571039023841720078}
-  - component: {fileID: 6300282693992991715}
+  - component: {fileID: 9213879301548967078}
+  - component: {fileID: 8918083699571178884}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7761440906329540684}
+  - {fileID: 3500591257615984688}
   m_Father: {fileID: 6985055629026813055}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6fc1864e2e760bf4dac990b87eca5dba, type: 2}
+  - {fileID: 2100000, guid: ebebecc4a8b186840ac942073ba3cad3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +99,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6300282693992991715
+--- !u!114 &9213879301548967078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +113,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathExplosion: {fileID: 1570171288654123530, guid: 756dddc5b3f9d884da8e919142524055, type: 3}
   goalExplosion: {fileID: 1570171288654123530, guid: 85ebf6e094f6ce24db9d461ef2a60c0b, type: 3}
-  hitEffect: {fileID: 6929906814678609298}
+  hitEffect: {fileID: 4254016923194789358}
+--- !u!54 &8918083699571178884
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571039023841720076}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1833992296747133517
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6985055629026813055}
   m_Layer: 0
-  m_Name: Orange Enemy
+  m_Name: Pink Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +161,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6754049225373585358
+--- !u!1001 &475560417613688754
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -201,13 +218,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6531b808729bfe46af6d6aa8d41133b, type: 3}
---- !u!4 &7761440906329540684 stripped
+--- !u!4 &3500591257615984688 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3894802914804254594, guid: c6531b808729bfe46af6d6aa8d41133b, type: 3}
-  m_PrefabInstance: {fileID: 6754049225373585358}
+  m_PrefabInstance: {fileID: 475560417613688754}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &6929906814678609298 stripped
+--- !u!198 &4254016923194789358 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4436268234515096156, guid: c6531b808729bfe46af6d6aa8d41133b, type: 3}
-  m_PrefabInstance: {fileID: 6754049225373585358}
+  m_PrefabInstance: {fileID: 475560417613688754}
   m_PrefabAsset: {fileID: 0}

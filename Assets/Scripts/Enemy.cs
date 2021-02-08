@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] ParticleSystem hitEffect;
 
     private int enemyHealth = 1;
+    private int enemyDamage = 1;
+
     private Transform explosionSpawnParent;
 
     void OnParticleCollision(GameObject other) {
@@ -35,6 +37,14 @@ public class Enemy : MonoBehaviour
 
     public void SetEnemyHealth( int hp) {
         enemyHealth = hp;
+    }
+
+    public void SetEnemyDamage( int dmg) {
+        enemyDamage = dmg;
+    }
+
+    public int GetEnemyDamage() {
+        return enemyDamage;
     }
 
 }
