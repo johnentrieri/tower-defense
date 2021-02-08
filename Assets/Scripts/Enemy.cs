@@ -12,6 +12,11 @@ public class Enemy : MonoBehaviour
     private int enemyDamage = 1;
 
     private Transform explosionSpawnParent;
+    private BaseHealth baseHealth;
+
+    void Start() {
+        baseHealth = FindObjectOfType<BaseHealth>();
+    }
 
     void OnParticleCollision(GameObject other) {
 
@@ -29,6 +34,7 @@ public class Enemy : MonoBehaviour
         float explosionDuration = explosion.main.duration;
         Destroy( Instantiate(explosion,transform.position,Quaternion.identity,explosionSpawnParent).gameObject, explosionDuration);
         Destroy(transform.parent.gameObject);
+        baseHealth.AddToScore(1);
     }
 
     public void SetSpawnParent( Transform parent) {
