@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class BaseHealth : MonoBehaviour
 {
     [SerializeField] int health = 10;
-    [SerializeField] int score = 0;
     [SerializeField] ParticleSystem explosion;
     [SerializeField] Transform explosionSpawnParent;
     [SerializeField] Text healthText;
     [SerializeField] Text scoreText;
+
+    private int score = 0;
 
     void Start() {
         healthText.text = health.ToString();
