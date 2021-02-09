@@ -8,14 +8,18 @@ public class BaseHealth : MonoBehaviour
     [SerializeField] int health = 10;
     [SerializeField] ParticleSystem explosion;
     [SerializeField] Transform explosionSpawnParent;
+    [SerializeField] AudioClip hitSFX;
+    [SerializeField] AudioClip deathSFX;
     [SerializeField] Text healthText;
     [SerializeField] Text scoreText;
 
+    private AudioSource audioSource;
     private int score = 0;
 
     void Start() {
         healthText.text = health.ToString();
         scoreText.text = score.ToString();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter(Collider other) {
@@ -23,7 +27,10 @@ public class BaseHealth : MonoBehaviour
         health -= dmg;
         if (health <= 0) {
             health = 0;
+            AudioSource.PlayClipAtPoint(deathSFX,Camera.main.transform.position,0.2f);
             ProcessBaseDeath();
+        } else {
+            audioSource.PlayOneShot(hitSFX);
         }
         healthText.text = health.ToString();
     }
@@ -34,8 +41,8 @@ public class BaseHealth : MonoBehaviour
     }
 
     private void ProcessBaseDeath() {
-        float explosionDuration = explosion.main.duration;
-        Destroy( Instantiate(explosion,transform.position,Quaternion.identity,explosionSpawnParent).gameObject, explosionDuration);
+        float explosionDuration = explosion.main.duration;        
+        Destroy(Instantiate(explosion,transform.position,Quaternion.identity,explosionSpawnParent).gameObject, explosionDuration);        
         Destroy(transform.gameObject);
     }
 }

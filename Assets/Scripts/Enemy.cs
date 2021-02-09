@@ -7,15 +7,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] ParticleSystem deathExplosion;
     [SerializeField] ParticleSystem goalExplosion;
     [SerializeField] ParticleSystem hitEffect;
+    [SerializeField] AudioClip hitSFX;
+    [SerializeField] AudioClip deathSFX;
 
     private int enemyHealth = 1;
     private int enemyDamage = 1;
 
     private Transform explosionSpawnParent;
     private BaseHealth baseHealth;
+    private AudioSource audioSource;
 
     void Start() {
         baseHealth = FindObjectOfType<BaseHealth>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnParticleCollision(GameObject other) {
@@ -23,6 +27,9 @@ public class Enemy : MonoBehaviour
         hitEffect.Play();
         if ( --enemyHealth <= 0) {
             ProcessEnemyDeath(deathExplosion);
+            AudioSource.PlayClipAtPoint(deathSFX,Camera.main.transform.position,0.2f);
+        } else {
+            audioSource.PlayOneShot(hitSFX);
         }
     }
 

@@ -9,16 +9,14 @@ public class EnemyController : MonoBehaviour
     [Tooltip("Enemy Health")][SerializeField] int enemyHealth;
     [Tooltip("Enemy Damage")][SerializeField] int enemyDamage;
     [Tooltip("Spawn Parent")][SerializeField] Transform spawnParent;
+    [Tooltip("Spawn Sound Effect")][SerializeField] AudioClip spawnSFX; 
     [Tooltip("Enemy Count")][SerializeField] int enemyCount = 1;
     [Tooltip("Enemies per Second")][SerializeField] float spawnRate = 1.0f;
     [Tooltip("Delay Before First Spawn")][SerializeField] float spawnDelay = 0.0f;
-    
-
 
     [Header("Movement Parameters")]
     [Tooltip("Blocks per Second")][SerializeField] float speed = 1.0f;
     [Tooltip("Frames per Block")][SerializeField] int steps = 60;
-
 
     private Pathfinder pathfinder;
     private List<EnemyBlock> path;
@@ -44,6 +42,7 @@ public class EnemyController : MonoBehaviour
 
             GameObject spawnedEnemy = GameObject.Instantiate(enemy, startPos, Quaternion.identity, spawnParent);
             spawnedEnemy.SetActive(true);
+            GetComponent<AudioSource>().PlayOneShot(spawnSFX);
 
             spawnedEnemy.GetComponentInChildren<Enemy>().SetSpawnParent(spawnParent);
             spawnedEnemy.GetComponentInChildren<Enemy>().SetEnemyHealth(enemyHealth);
